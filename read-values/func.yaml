@@ -1,0 +1,26 @@
+specVersion: 0.34.0
+name: read-values
+runtime: go
+registry: docker.io/salaboy
+image: docker.io/salaboy/read-values:latest
+imageDigest: sha256:786d481961fd5deea6eefb166dc882eced16fc1875c291126c4126d2104d941e
+created: 2023-02-20T11:13:46.337732Z
+invocation:
+  format: http
+build:
+  buildpacks:
+  - paketo-buildpacks/go-dist
+  - ghcr.io/boson-project/go-function-buildpack:tip
+  builder: pack
+  buildEnvs: []
+run:
+  volumes: []
+  envs: []
+deploy:
+  namespace: default
+  annotations: {}
+  options: {}
+  labels: []
+  healthEndpoints:
+    liveness: /health/liveness
+    readiness: /health/readiness
