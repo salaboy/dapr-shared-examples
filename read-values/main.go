@@ -57,7 +57,11 @@ func Handle(res http.ResponseWriter, req *http.Request) {
 	}
 
 	var avg float64
-	avg = float64(total / count)
+	if count == 0 {
+		avg = float64(0)
+	} else {
+		avg = float64(total / count)
+	}
 	respondWithJSON(res, http.StatusOK, avg)
 }
 
