@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"net"
 	"net/http"
 
 	dapr "github.com/dapr/go-sdk/client"
@@ -17,7 +16,7 @@ var PUB_SUB_NAME = "notifications-pubsub"
 var PUB_SUB_TOPIC = "notifications"
 
 var daprClient dapr.Client
-var DAPR_HOST = "http://my-ambient-dapr-ambient.default.svc.cluster.local"
+var DAPR_HOST = "my-ambient-dapr-ambient.default.svc.cluster.local"
 var DAPR_PORT = "50001"
 
 type MyValues struct {
@@ -26,13 +25,13 @@ type MyValues struct {
 
 func main() {
 	r := chi.NewRouter()
-	r.Get("/", Handle)
+	r.Post("/", Handle)
 	http.ListenAndServe(":8080", r)
 }
 
 func Handle(res http.ResponseWriter, req *http.Request) {
 	ctx := context.Background()
-	daprClient, err := dapr.NewClientWithAddress(net.JoinHostPort(DAPR_HOST, DAPR_PORT))
+	daprClient, err := dapr.NewClientWithAddress(fmt.Sprint("%s:%s", DAPR_HOST, DAPR_PORT))
 	if err != nil {
 		panic(err)
 	}

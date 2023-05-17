@@ -54,10 +54,7 @@ func printRoot(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	appPort := os.Getenv("APP_PORT")
-	if appPort == "" {
-		appPort = "8080"
-	}
+	port := GetenvOrDefault("APP_PORT", "8080")
 
 	r := chi.NewRouter()
 
@@ -72,10 +69,18 @@ func main() {
 		json.NewEncoder(w).Encode(map[string]bool{"ok": true})
 	})
 
-	log.Printf("Starting Subscriber in Port: %s", appPort)
+	log.Printf("Starting Subscriber in Port: %s", port)
 	// Start the server; this is a blocking call
-	err := http.ListenAndServe(":"+appPort, r)
+	err := http.ListenAndServe(":"+port, r)
 	if err != http.ErrServerClosed {
 		log.Panic(err)
 	}
+}
+
+func GetenvOrDefault(envName, defaultValue string) string {
+	v := os.Getenv(envName)
+	if v != "" {
+		return v
+	}
+	return defaultValue
 }
