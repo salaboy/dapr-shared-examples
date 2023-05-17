@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: write-values
+spec:
+  selector:
+    matchLabels:
+      app: write-values
+  template:
+    metadata:
+      labels:
+        app: write-values
+    spec:
+      containers:
+      - name: write-values
+        image: matheuscruzdev/write-values:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: write-values-svc
+spec:
+  selector:
+    app: write-values
+  ports:
+  - port: 8080
+    targetPort: 8080
