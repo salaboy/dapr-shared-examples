@@ -1,4 +1,5 @@
-FROM alpine
+ARG ARCH=
+FROM ${ARCH}alpine
 
 COPY main main
 

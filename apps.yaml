@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: read-values
-        image: salaboy/ambient-read-values
+        image: salaboy/ambient-read-values:latest
         resources:
           limits:
             memory: "128Mi"

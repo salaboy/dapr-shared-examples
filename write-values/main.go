@@ -4,7 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
+	"os"
 
 	dapr "github.com/dapr/go-sdk/client"
 	"github.com/go-chi/chi"
@@ -24,9 +26,11 @@ type MyValues struct {
 }
 
 func main() {
+	port := GetenvOrDefault("APP_PORT", "8080")
 	r := chi.NewRouter()
 	r.Post("/", Handle)
-	http.ListenAndServe(":8080", r)
+	log.Printf("Starting Write Values App in Port: %s", port)
+	http.ListenAndServe(":"+port, r)
 }
 
 func Handle(res http.ResponseWriter, req *http.Request) {
@@ -71,4 +75,12 @@ func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(code)
 	w.Write(response)
+}
+
+func GetenvOrDefault(envName, defaultValue string) string {
+	v := os.Getenv(envName)
+	if v != "" {
+		return v
+	}
+	return defaultValue
 }

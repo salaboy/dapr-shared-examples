@@ -1,5 +1,5 @@
-module github.com/salaboy/subscriber
+module github.com/salaboy/ambient-subscriber
 
-go 1.14
+go 1.18
 
 require github.com/go-chi/chi v1.5.4

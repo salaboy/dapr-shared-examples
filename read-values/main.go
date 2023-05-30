@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"strconv"
@@ -28,6 +29,7 @@ func main() {
 		json.NewEncoder(w).Encode(map[string]bool{"ok": true})
 	})
 	port := GetenvOrDefault("APP_PORT", "8080")
+	log.Printf("Starting Read Values App in Port: %s", port)
 	http.ListenAndServe(":"+port, r)
 }
 
