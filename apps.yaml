@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: read-values
-        image: salaboy/read-values
+        image: salaboy/ambient-read-values
         resources:
           limits:
             memory: "128Mi"
@@ -47,7 +47,7 @@ spec:
     spec:
       containers:
       - name: subscriber
-        image: salaboy/subscriber:latest
+        image: salaboy/ambient-subscriber:latest
         resources:
           limits:
             memory: "128Mi"
@@ -81,7 +81,7 @@ spec:
     spec:
       containers:
       - name: write-values
-        image: salaboy/write-values:latest
+        image: salaboy/ambient-write-values:latest
         resources:
           limits:
             memory: "128Mi"
