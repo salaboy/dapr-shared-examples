@@ -29,7 +29,7 @@ spec:
   selector:
     app: read-values
   ports:
-  - port: 8080
+  - port: 80
     targetPort: 8080
 ---
 apiVersion: apps/v1
@@ -63,7 +63,7 @@ spec:
   selector:
     app: subscriber
   ports:
-  - port: 8080
+  - port: 80
     targetPort: 8080
 ---
 apiVersion: apps/v1
@@ -97,5 +97,5 @@ spec:
   selector:
     app: write-values
   ports:
-  - port: 8080
+  - port: 80
     targetPort: 8080
