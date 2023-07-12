@@ -14,6 +14,9 @@ spec:
       containers:
       - name: read-values
         image: salaboy/ambient-read-values:latest
+        env: 
+        - name: DAPR_HOST
+          value: my-ambient
         resources:
           limits:
             memory: "128Mi"
@@ -82,6 +85,9 @@ spec:
       containers:
       - name: write-values
         image: salaboy/ambient-write-values:latest
+        env:
+        - name: DAPR_HOST
+          value: my-ambient
         resources:
           limits:
             memory: "128Mi"

@@ -12,14 +12,14 @@ import (
 	"github.com/go-chi/chi"
 )
 
-var STATE_STORE_NAME = "statestore"
-
-var PUB_SUB_NAME = "notifications-pubsub"
-var PUB_SUB_TOPIC = "notifications"
-
-var daprClient dapr.Client
-var DAPR_HOST = "my-ambient-dapr-ambient.default.svc.cluster.local"
-var DAPR_PORT = "50001"
+var (
+	daprClient       dapr.Client
+	STATE_STORE_NAME = GetenvOrDefault("STATE_STORE_NAME", "statestore")
+	DAPR_HOST        = GetenvOrDefault("DAPR_HOST", "my-ambient.default.svc.cluster.local")
+	DAPR_PORT        = GetenvOrDefault("DAPR_PORT", "50001")
+	PUB_SUB_NAME     = GetenvOrDefault("PUB_SUB_NAME", "notifications-pubsub")
+	PUB_SUB_TOPIC    = GetenvOrDefault("PUB_SUB_TOPIC", "notifications")
+)
 
 type MyValues struct {
 	Values []string
